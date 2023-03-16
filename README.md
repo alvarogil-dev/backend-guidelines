@@ -1,7 +1,3 @@
-# BACKEND GUIDELINES
-
----
-
 This document intends to group some guidelines and good practices that teams
 should follow while developing projects for mentoring sessions.
 
