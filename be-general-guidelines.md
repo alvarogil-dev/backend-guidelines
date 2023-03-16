@@ -1,7 +1,5 @@
 # Backend general guidelines
 
----
-
 As backend team:
 
 * We aim to design and implement **clean code solutions**.
@@ -22,8 +20,6 @@ To do so, we write down some guidelines that could be useful.
 
 ## Boy scout rule
 
----
-
 > We ensure **code quality** by **testing** and conducting **code reviews**.
 > 
 > We contribute to the **maturity** and **trust** of the team by providing **feedback** to other
@@ -32,8 +28,6 @@ team members and by applying the **[boy scout rule](#boy-scout-rule)**.
 ![Boy scout rule](./img/boy-scout-rule.png "Boy scout rule" )
 
 ## Clean code
-
----
 
 > We aim to design and implement **clean code solutions**.
 
@@ -44,8 +38,6 @@ In [this article](https://medium.com/@BrunoLM7/a-brief-summary-of-clean-code-c0c
 ![Clean code](./img/clean-code.jpg "clean code")
 
 ## SOLID principles
-
----
 
 > We develop maintainable, robust, scalable and reliable applications.
 
@@ -73,8 +65,6 @@ rigid, fragile and coupled code. These principles are the following:
 ![Solid principles](./img/solid-principles.jpg "solid principles")
 
 ## Think before code
-
----
 
 > We aim to design and implement **clean code solutions**.
 > 
