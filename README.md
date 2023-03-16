@@ -1,1 +1,25 @@
-# backend-general-guidelines
+# BACKEND GUIDELINES
+
+---
+
+This document intends to group some guidelines and good practices that teams
+should follow while developing projects for mentoring sessions.
+
+### [Backend general guidelines](./be-general-guidelines.md)
+
+### Feature development guidelines
+
+### API guidelines
+
+### Testing guidelines
+
+### Linting guidelines
+
+### Git guidelines
+
+### Documentation guidelines
+
+### Code guidelines
+
+### Logging guidelines
+
