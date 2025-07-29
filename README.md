@@ -11,7 +11,7 @@ should follow while developing projects for mentoring sessions.
 
 ### Linting guidelines
 
-### Git guidelines
+### [Git guidelines](./git-guidelines.md)
 
 ### Documentation guidelines
 
