@@ -90,6 +90,35 @@ docs: update README usage instructions
 ```
 Settings → Plugins → Marketplace → Search "Conventional Commit"
 ```
+
+### 🔍 Commitlint + Husky
+
+Let’s enforce commit message rules automatically.
+
+**Steps:**
+
+1. Install dev dependencies:
+```bash
+npm install --save-dev husky @commitlint/{config-conventional,cli}
+```
+
+2. Add config file:
+```bash
+echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+```
+
+3. Enable hooks:
+```bash
+npx husky install
+```
+
+4. Add hook to validate commits:
+```bash
+npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
+```
+
+> ⚠️ Git hooks are local, not pushed to GitHub. Make sure teammates install them!
+
 ---
 
 ## Why this matters
@@ -117,3 +146,135 @@ Clean Git practices bring clarity in PR reviews, help you squash bugs faster, an
 
 Git is our timeline. Let’s make it clean, clear, and human-friendly.  
 Future-you (and your team) will thank you. 🙌
+
+
+---
+
+## 🧬 Git Workflow: GitFlow + Clean History
+
+> We follow a **branching strategy** that keeps our repo organized and easy to navigate.
+
+We loosely follow **GitFlow**, with some simplifications:
+
+- `main`: stable code, always ready to deploy
+- `develop`: ongoing development
+- `feature/*`: feature branches, merge into `develop`
+- `hotfix/*`: quick fixes, go directly to `main` (and then `develop`)
+- `release/*`: optional, used when preparing a release
+
+<details>
+<summary>🔍 View diagram</summary>
+
+```mermaid
+flowchart TD
+    main -->|hotfix| hotfix1
+    develop -->|new feature| feature1
+    feature1 --> develop
+    develop -->|prepare release| release1
+    release1 --> main
+    release1 --> develop
+```
+
+</details>
+
+---
+
+## 🧪 Merge vs Rebase vs Squash
+
+> We **prefer `rebase` over `merge`** to keep a linear and clean history.
+
+### 🧷 Merge
+
+Keeps all the individual commits + adds a merge commit.  
+Good for preserving full history, but makes it **messy** for short-lived branches.
+
+<details>
+<summary>🔍 View diagram</summary>
+
+```mermaid
+gitGraph
+   commit id: "main"
+   branch develop
+   commit id: "Initial"
+   branch feature
+   commit id: "feat A"
+   checkout develop
+   commit id: "fix 1"
+   merge feature
+```
+
+</details>
+
+*Result: one extra merge commit, multiple parallel lines.*
+
+---
+
+### 🔁 Rebase (we prefer this)
+
+Moves your commits on top of the latest from the target branch.  
+Keeps history **linear**, cleaner for `git log`.
+
+<details>
+<summary>🔍 View diagram</summary>
+
+```mermaid
+gitGraph
+   commit id: "main"
+   branch develop
+   commit id: "Initial"
+   branch feature
+   commit id: "feat A"
+   checkout develop
+   commit id: "fix 1"
+   checkout feature
+   rebase develop
+   checkout develop
+   merge feature
+```
+
+</details>
+
+*Result: linear history, easier to follow.*
+
+> ⚠️ Rebase only works well when your feature branch is **local and not shared yet**.
+
+---
+
+### ✂️ Squash
+
+Squash combines all your commits into a **single commit** when merging a PR.  
+Perfect for keeping the history tidy for small features or WIP.
+
+<details>
+<summary>🔍 View diagram</summary>
+
+```mermaid
+gitGraph
+   commit id: "main"
+   branch feature
+   commit id: "Add A"
+   commit id: "Fix typo"
+   commit id: "Update tests"
+   checkout main
+   merge feature squash
+```
+
+</details>
+
+*Result: One meaningful commit in `main`.*
+
+---
+
+## ✅ Our Recommendation
+
+| Situation | Recommended Action |
+|----------|--------------------|
+| Ongoing work in feature branch | `git pull --rebase` to stay updated |
+| Finishing a feature | Rebase before opening PR |
+| Merging PR | Prefer **Squash & merge** |
+| Fixing conflicts in PR | Use `git rebase develop` |
+
+> Rebase = clean commit history  
+> Merge = messy but safe  
+> Squash = best of both if history isn't critical
+
